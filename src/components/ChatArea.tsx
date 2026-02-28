@@ -269,7 +269,7 @@ const ChatArea = ({ messages, setMessages }: ChatAreaProps) => {
       </div>
 
       {/* Fixed bottom input — no border divider */}
-      <div className="bg-background px-6 py-4">
+      <div className="px-6 py-4">
         {InputBox}
       </div>
     </div>
