@@ -104,7 +104,7 @@ const ChatArea = ({ messages, setMessages }: ChatAreaProps) => {
   const InputBox = (
     <div className="w-full max-w-3xl mx-auto">
       <div
-        className="rounded-2xl border border-border bg-background shadow-sm transition-shadow focus-within:shadow-md"
+        className="rounded-2xl border border-border bg-background transition-shadow focus-within:glow-primary gradient-border"
         style={{ boxShadow: "0 2px 12px hsl(var(--chat-input-shadow) / 0.5)" }}
       >
         <textarea
@@ -148,7 +148,7 @@ const ChatArea = ({ messages, setMessages }: ChatAreaProps) => {
               whileTap={{ scale: 0.95 }}
               onClick={handleSend}
               disabled={!input.trim() || isStreaming}
-              className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-opacity"
+              className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 transition-opacity glow-primary-sm"
             >
               <Send size={14} />
             </motion.button>
@@ -160,16 +160,28 @@ const ChatArea = ({ messages, setMessages }: ChatAreaProps) => {
 
   if (isEmpty) {
     return (
-      <div className="flex-1 flex flex-col items-center justify-center px-6">
+      <div className="flex-1 flex flex-col items-center justify-center px-6 tech-grid-bg">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
+          <motion.div
+            className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5 glow-primary-sm"
+            animate={{ boxShadow: [
+              "0 0 12px -3px hsl(240 73.9% 61% / 0.2)",
+              "0 0 20px -3px hsl(240 73.9% 61% / 0.35)",
+              "0 0 12px -3px hsl(240 73.9% 61% / 0.2)",
+            ]}}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Sparkles size={24} className="text-primary" />
+          </motion.div>
           <h1 className="text-3xl font-semibold text-foreground mb-2 tracking-tight">
             今天我能为您做些什么？
           </h1>
+          <p className="text-sm text-muted-foreground">Rita · 您的智能助理</p>
         </motion.div>
 
         <motion.div
@@ -190,7 +202,7 @@ const ChatArea = ({ messages, setMessages }: ChatAreaProps) => {
           {quickActions.map((action) => (
             <button
               key={action.label}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-border text-sm text-muted-foreground hover:text-foreground hover:border-foreground/20 hover:bg-accent transition-colors"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-border text-sm text-muted-foreground hover:text-primary hover:border-primary/30 hover:bg-primary/5 hover:glow-primary-sm transition-all duration-200"
             >
               <action.icon size={14} />
               {action.label}
@@ -216,7 +228,7 @@ const ChatArea = ({ messages, setMessages }: ChatAreaProps) => {
                 className={`flex ${msg.role === "user" ? "justify-end" : "justify-start gap-3"}`}
               >
                 {msg.role === "assistant" && (
-                  <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5 glow-primary-sm">
                     <Sparkles size={14} className="text-primary" />
                   </div>
                 )}
@@ -256,8 +268,8 @@ const ChatArea = ({ messages, setMessages }: ChatAreaProps) => {
         </div>
       </div>
 
-      {/* Fixed bottom input */}
-      <div className="border-t border-border bg-background px-6 py-4">
+      {/* Fixed bottom input — no border divider */}
+      <div className="bg-background px-6 py-4">
         {InputBox}
       </div>
     </div>

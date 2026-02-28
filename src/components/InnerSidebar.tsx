@@ -34,7 +34,7 @@ const InnerSidebar = ({ onNewChat }: InnerSidebarProps) => {
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.98 }}
           onClick={onNewChat}
-          className="w-full flex items-center justify-center gap-2 h-10 rounded-xl bg-primary text-primary-foreground font-medium text-sm transition-colors hover:bg-primary/90"
+          className="w-full flex items-center justify-center gap-2 h-10 rounded-xl bg-primary text-primary-foreground font-medium text-sm transition-all hover:bg-primary/90 glow-primary-sm"
         >
           <Plus size={16} />
           New Chat
